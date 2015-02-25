@@ -64,7 +64,40 @@ var deep = require('deep-diff')
 <script src="deep-diff-0.2.0.min.js"></script>
 ```
 > Minified, browser release of the current version of the module is under the `releases` folder.
-> In a browser, `deep-diff` defines a global variable `DeepDiff`. If there is a conflict in the global namesapce you can restore the conflicting definition and assign `deep-diff` to another variable like this: `var deep = DeepDiff.noConflict();`.
+> In a browser, `deep-diff` defines a global variable `DeepDiff`. If there is a conflict in the global namespace you can restore the conflicting definition and assign `deep-diff` to another variable like this: `var deep = DeepDiff.noConflict();`.
+
+**polymer**
+
+Simple diff functionnality is exposed through data-binding. Assign `lhs` and `rhs` attributes, then call the go() function.
+It will fire a `diff` event containing the diff array.
+```html
+<link rel="import" href="deep-diff.html">
+<!-- ... -->
+<deep-diff lhs="{{lhs}}" rhs="{{rhs}}" on-diff="{{printDiff}}"></deep-diff>
+```
+
+```javascript
+function printDiff(ev){
+	console.log(ev.detail);
+}
+
+var deepDiff = document.querySelector('deep-diff');
+deepDiff.go()
+```
+
+The `<deep-diff>` element exposes all normal functionality of deep-diff as normal methods.
+```html
+<link rel="import" href="deep-diff.html">
+<!-- ... -->
+<deep-diff></deep-diff>
+```
+
+```javascript
+var deepDiff = document.querySelector('deep-diff');
+
+//Invoke exposed functions as described below
+var diff = deepDiff.diff(lhs,rhs);
+```
 
 ## Simple Examples
 
