@@ -341,6 +341,26 @@
 
   if (typeof module !== 'undefined' && module && typeof exports === 'object' && exports && module.exports === exports) {
     module.exports = accumulateDiff; // nodejs
+  } else if(typeof Polymer !== 'undefined' && Polymer) {
+
+    /* Polymer.
+     *
+     * In order to use it, include deep-diff.html in your app.
+     * This custom element exposes all the library's functions plus
+     * a go function that will calculate the diff between its lhs and rhs
+     * property, then fire a 'diff' event containing the diff array.
+     *
+     * N.B. this will only work if invoked in a named html custom element
+     * such as deep-diff.html.
+     */
+
+    Polymer(Polymer.mixin(accumulateDiff,{
+      go : function(){
+        var result = this.diff(this.lhs,this.rhs);
+        this.fire('diff',result);
+      }
+    }));
+
   } else {
     $scope.DeepDiff = accumulateDiff; // other... browser?
   }
