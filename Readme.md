@@ -2,6 +2,8 @@
 
 **deep-diff** is a javascript/node.js module providing utility functions for working with the structural differences between objects.
 
+This fork gives it a Polymer component interface if it is used in the context of polymer.
+
 ## Features
 
 * Get the structural differences between two objects.
